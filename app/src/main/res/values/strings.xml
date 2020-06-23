@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">Laundr It</string>
+    <string name="app_name" translatable="false">Laundr It</string>
+
+    <string name="titMenu">Menu</string>
+    <string name="titIdioma">Idioma</string>
+    <string name="titLogin">Login</string>
+
+    <string name="txtFechar">Fechar</string>
+    <string name="txtMail">e-mail</string>
+    <string name="txtSenha">Senha</string>
+    <string name="txtNome">Nome</string>
+    <string name="txtEntrar">Entrar</string>
+    <string name="txtSalvar">Salvar</string>
+    <string name="txtCadastrar">Cadastrar</string>
+
+    <string name="txtNaoCad">Não está Cadastrado?</string>
+    <string name="txtNovoCad">Novo Cadastro</string>
+    <string name="txtEsqueceuSenha">Esqueceu sua Senha?</string>
+    <string name="txtRecuperarSenha">Recuperar Senha</string>
+
+    <string name="hintMail">digite seu e-mail</string>
+    <string name="hintSenha">digite sua senha</string>
+    <string name="hintNome">digite seu nome</string>
 </resources>
