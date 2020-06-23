@@ -4,6 +4,7 @@
     <string name="titMenu">Menu</string>
     <string name="titIdioma">Idioma</string>
     <string name="titLogin">Login</string>
+    <string name="titUsuarioCad">Cadastro Usuário</string>
 
     <string name="txtFechar">Fechar</string>
     <string name="txtMail">e-mail</string>

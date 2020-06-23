@@ -2,7 +2,6 @@ package br.com.ticdemestre.laundrit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,39 +21,44 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+public class UsuarioCadActivity extends AppCompatActivity {
     String resposta = "";
-    String versao = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_usuario_cad);
+
+        EditText mail = (EditText) findViewById(R.id.edtMail);
+        EditText nome = (EditText) findViewById(R.id.edtNome);
+
+        SharedPreferences dados = getSharedPreferences("laundrit", MODE_PRIVATE);
+        mail.setText(dados.getString("mail", " "));
+        nome.setText(dados.getString("nome", " "));
     }
 
-    public void entrar(View v) {
+    public void salvar(View v) {
         EditText mail = (EditText) findViewById(R.id.edtMail);
         EditText senha = (EditText) findViewById(R.id.edtSenha);
+        EditText nome = (EditText) findViewById(R.id.edtNome);
 
         SharedPreferences.Editor dados = getSharedPreferences("laundrit", MODE_PRIVATE).edit();
         dados.putString("mail", mail.getText().toString());
         dados.putString("senha", senha.getText().toString());
-        // dados.putInt("login", 1);
+        dados.putString("nome", nome.getText().toString());
+        dados.putInt("login", 0);
         dados.commit();
-
-        // finish();
 
         postRequest();
     }
 
-    public void cadastro(View v) {
-        Intent tela = new Intent(this, UsuarioCadActivity.class);
-        startActivity(tela);
+    public void fechar(View v) {
+        finish();
     }
 
     private void postRequest() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://ticdemestre.com.br/laundrit/post_login.php";
+        String url = "https://ticdemestre.com.br/laundrit/post_data.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -62,41 +66,41 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     resposta = jsonObject.getString("resultado");
-                    versao = jsonObject.getString("versao");
 
                     if (resposta.contains("OK")) {
-                        Toast.makeText(LoginActivity.this, "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
-
-                        SharedPreferences.Editor dados = getSharedPreferences("laundrit", MODE_PRIVATE).edit();
-                        dados.putInt("login", 1);
-                        dados.putInt("versao", Integer.parseInt(versao) );
-                        dados.commit();
+                        Toast.makeText(UsuarioCadActivity.this, "Cadastro efetuado com sucesso", Toast.LENGTH_LONG).show();
 
                         finish();
+                    } else if (resposta.contains("EXISTE")) {
+                        Toast.makeText(UsuarioCadActivity.this, "e-mail já cadastrado no sistema", Toast.LENGTH_LONG).show();
+                    } else if (resposta.contains("BD ERRO")) {
+                        Toast.makeText(UsuarioCadActivity.this, "Erro na inserção no Banco de Dados", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Erro no Login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UsuarioCadActivity.this, "Erro no Cadastro", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     resposta = "POST DATA : unable to Parse Json";
-                    Toast.makeText(LoginActivity.this, "POST DATA : unable to Parse Json", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UsuarioCadActivity.this, "POST DATA : unable to Parse Json", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 resposta = "Post Data : Response Failed";
-                Toast.makeText(LoginActivity.this, "Post Data : Response Failed" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UsuarioCadActivity.this, "Post Data : Response Failed" + error, Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 EditText mail = (EditText) findViewById(R.id.edtMail);
                 EditText senha = (EditText) findViewById(R.id.edtSenha);
+                EditText nome = (EditText) findViewById(R.id.edtNome);
 
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("data_mail", mail.getText().toString());
                 params.put("data_senha", senha.getText().toString());
+                params.put("data_nome", nome.getText().toString());
                 return params;
             }
 

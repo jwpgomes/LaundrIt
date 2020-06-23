@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".UsuarioCadActivity"
     android:background="@color/corFundo" >
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:text="@string/titLogin"
+        android:text="@string/titUsuarioCad"
         android:textAlignment="center"
         android:textColor="@color/corTexto"
         android:textSize="24sp"
@@ -53,21 +53,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/edit_text_shape"
         android:ems="10"
         android:hint="@string/hintMail"
         android:inputType="textEmailAddress"
         app:layout_constraintBaseline_toBaselineOf="@id/txtMail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtMail"
-        android:autofillHints="" />
+        android:background="@drawable/edit_text_shape"/>
 
     <TextView
         android:id="@+id/txtSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="@string/txtSenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMail"
@@ -88,71 +87,59 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/txtSenha" />
 
+    <TextView
+        android:id="@+id/txtNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/txtNome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSenha"
+        android:textColor="@color/corTexto"/>
+
+    <EditText
+        android:id="@+id/edtNome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:hint="@string/hintNome"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@id/txtNome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtSenha"
+        android:background="@drawable/edit_text_shape"/>
+
     <Button
         android:id="@+id/btnSalvar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/botao_arredondado"
-        android:onClick="entrar"
-        android:text="@string/txtEntrar"
+        android:onClick="salvar"
+        android:text="@string/txtSalvar"
         android:textColor="@color/corTextoInverso"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
-
-
-    <TextView
-        android:id="@+id/txtNaoCad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/txtNaoCad"
-        android:textColor="@color/corTexto"
-        app:layout_constraintBaseline_toBaselineOf="@id/btnNovoCad"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="14sp"/>
+        app:layout_constraintStart_toEndOf="@+id/btnFechar"
+        app:layout_constraintTop_toBottomOf="@+id/edtNome" />
 
     <Button
-        android:id="@+id/btnNovoCad"
+        android:id="@+id/btnFechar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/botao_arredondado"
-        android:onClick="cadastro"
-        android:text="@string/txtNovoCad"
+        android:onClick="fechar"
+        android:text="@string/txtFechar"
         android:textColor="@color/corTextoInverso"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtNaoCad"
-        app:layout_constraintTop_toBottomOf="@+id/btnSalvar" />
-
-    <TextView
-        android:id="@+id/txtEsqueceuSenha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/txtEsqueceuSenha"
-        android:textColor="@color/corTexto"
-        android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/btnEsqueceuSenha"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnEsqueceuSenha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/botao_arredondado"
-        android:text="@string/txtRecuperarSenha"
-        android:textColor="@color/corTextoInverso"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtNaoCad"
-        app:layout_constraintTop_toBottomOf="@+id/btnNovoCad" />
+        app:layout_constraintEnd_toStartOf="@+id/btnSalvar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
